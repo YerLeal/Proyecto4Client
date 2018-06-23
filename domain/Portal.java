@@ -23,11 +23,10 @@ public class Portal extends Thread {
     private int iCont, player;
     private int state = 0;
     private boolean s = true;
-
+    private boolean end=false;
     public Portal(int x, int y, int player) {
         this.x = x;
         this.y = y;
-
         this.iCont = 7;
         this.player = player;
         this.sprites = new ArrayList<>();
@@ -41,6 +40,8 @@ public class Portal extends Thread {
     public void setState(int state) {
         this.state = state;
     }
+    
+    
 
     @Override
     public void run() {
@@ -48,6 +49,9 @@ public class Portal extends Thread {
         while (s) {
             if (state == 1) {
                 portalClose();
+                if(end){
+                    Window.cosa=false;
+                }
             } else {
                 iCont--;
 
@@ -57,12 +61,20 @@ public class Portal extends Thread {
                     Logger.getLogger(Missile.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         }
     }
 
+    public int getiCont() {
+        return iCont;
+    }
+
+    public void setEnd(boolean end) {
+        this.end = end;
+    }
+
     public void chargeSprites() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             if (player == 1) {
                 this.sprites.add(new Image("/assets/p" + i + ".png"));
             } else {
@@ -72,7 +84,7 @@ public class Portal extends Thread {
     }
 
     public void portalClose() {
-        while (iCont < 7) {
+        while (iCont < 8) {
             iCont++;
             try {
                 Thread.sleep(100);
@@ -87,7 +99,7 @@ public class Portal extends Thread {
         if (iCont < 0) {
             iCont = 3;
         }
-        gc.drawImage(sprites.get(iCont), x, y,35,150);
+        gc.drawImage(sprites.get(iCont), x, y, 35, 150);
     }
 
 }
