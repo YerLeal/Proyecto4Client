@@ -81,6 +81,7 @@ public class Portal extends Thread {
             }
         }
         s = false;
+        Window.cosa = false;
     }
 
     public void draw(GraphicsContext gc) {

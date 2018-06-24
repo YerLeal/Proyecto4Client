@@ -31,7 +31,7 @@ public class Window extends Application {
     private GraphicsContext gc1, gc2;
     private int playerNumber = 1;
     private Button btnAddMother, btnLaunch;
-    public static Boolean state1 = false,cosa=true;
+    public static Boolean state1 = false, cosa = true;
     private SpaceShip mother;
     private Missile missile;
     private Portal portal;
@@ -94,8 +94,8 @@ public class Window extends Application {
         btnLaunch.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cosa = true;
                 new Thread(launch).start();
-            
             }
         });
         this.hBox.getChildren().add(canvasPlayer1);
@@ -129,9 +129,12 @@ public class Window extends Application {
     };
 
     public static void main(String[] args) {
-//        String s = JOptionPane.showInputDialog("direc");
-//        utilities.Constants.address = s;
-        launch(args);
+//        launch(args);
+        String s = JOptionPane.showInputDialog("direc");
+        utilities.Constants.address = s;
+        MyClient client = new MyClient();
+        client.setAction("CHAT");
+        client.start();
     } // main
 
     public void drawGrid(GraphicsContext gcM) {
